@@ -146,7 +146,7 @@ class Property{
 	
 	public Property(){
 		Properties prop = new Properties();
-		String fileName = "/home/main/SocketConnectionUtilitiesV4/Java(Client)Java(Server)/Javaserver/javaServer.cfg";
+		String fileName = "/home/main/SocketConnectionUtilitiesV4/C(Client)Java(Server)/Javaserver/javaServer.cfg";
 		try (FileInputStream fis = new FileInputStream(fileName)) {
 		    prop.load(fis);
 		} 
