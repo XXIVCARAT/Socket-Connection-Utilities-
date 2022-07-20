@@ -9,7 +9,7 @@ public class Client
 	private Socket socket		 = null;
 	private DataInputStream input = null;
 	private DataOutputStream out	 = null;
-	
+	private int sentFlag = 0 ;
 	
 	
 
@@ -24,50 +24,57 @@ public class Client
 			socket = new Socket(address, port);
 			
 
-			// takes input from terminal
-			input = new DataInputStream(System.in);
-
 			// sends output to the socket
 			out = new DataOutputStream(socket.getOutputStream());
 		}
 		catch(UnknownHostException u)
 		{
-			System.out.println(u);
+		
+			if(Property.getMode()){
+        			System.out.println(u);	
+        		}
 		}
 		catch(IOException i)
 		{
-			System.out.println(i);
+			if(Property.getMode()){
+        			System.out.println(i);	
+        		}
 		}
 
 		
-		String cmd="";
+		String outGoingMessage="";
 		for(int i = 0 ; i < args.length ; i++){
 		
-			cmd=(new StringBuilder()).append(cmd).append(args[i]).toString(); 
-			cmd=(new StringBuilder()).append(cmd).append(" ").toString(); 
+			outGoingMessage=(new StringBuilder()).append(outGoingMessage).append(args[i]).toString(); 
+			outGoingMessage=(new StringBuilder()).append(outGoingMessage).append(" ").toString(); 
 		}
 		try{
     				
-    				//System.out.println(cmd);
-    				out.write(cmd.getBytes());
-    			} 
-   			catch (IOException e) {
-        			// TODO Auto-generated catch block
-        			//e.printStackTrace();
-        			System.out.print("Not Connected....Make sure server is Running");	
+			if(Property.getMode()){
+				System.out.println(outGoingMessage);	
+			}
+			out.write(outGoingMessage.getBytes());
+		} 
+		catch (Exception e) {
+			
+			//e.printStackTrace();
+			if(Property.getMode()){
+				System.out.println("Not Connected....Make sure server is Running");	
+			}
     			
 		}
 
 		// close the connection
 		try
 		{
-			input.close();
 			out.close();
 			socket.close();
 		}
-		catch(IOException i)
+		catch(Exception i)
 		{
-			System.out.println(i);
+			if(Property.getMode()){
+				System.out.println(i);	
+			}
 		}
 	}
 	
@@ -77,7 +84,7 @@ public class Client
 		
 		Property property = new Property();
 		Client client = new Client(property.getHostname() , property.getPORT() , args);
-		//Client client = new Client("localhost" , 5000 , args);
+		
 	}
 
 }
@@ -86,10 +93,11 @@ class Property{
 
 	private String hostname;
 	private String PORT;
+	private static String debugFlag;
 	
 	public Property(){
 		Properties prop = new Properties();
-		String fileName = "ip.config";
+		String fileName = "/home/main/SocketConnectionUtilitiesV4/Java(Client)C(Server)/JavaClient/JavaClient.cfg";
 		try (FileInputStream fis = new FileInputStream(fileName)) {
 		    prop.load(fis);
 		} 
@@ -99,8 +107,10 @@ class Property{
 		catch (IOException ex) {
 		    
 		}
-		this.hostname = prop.getProperty("hostname");
+		this.hostname = prop.getProperty("HOSTNAME");
 		this.PORT = prop.getProperty("PORT");
+		this.debugFlag = prop.getProperty("DEBUGMODE");
+		
 	}
 	
 	public String getHostname(){
@@ -110,8 +120,17 @@ class Property{
 	public int getPORT(){
 	
 		
-			return  Integer.parseInt(PORT.trim());
+		return  Integer.parseInt(PORT.trim());
 		
+		
+	}
+	public static boolean getMode(){
+	
+		
+		if(Integer.parseInt(debugFlag.trim())==1){
+			return true;
+		}
+		return false;
 		
 	}
 }

@@ -1,0 +1,23 @@
+Configuration (.cfg) File Format
+
+****This format should be strictly followed***
+
+/********************************************************
+/*DEBUGMODE=
+/*PORT=
+/*HOSTNAME=
+/*********************************************************
+
+-Make sure absolute path of the configuration file is given in the program
+-Make sure there are not any whitespaces following the values entered
+-Make sure configuration file doesnt start with an empty line
+-Order of 'DEBUGMODE' , 'PORT' , 'HOSTNAME' should not changed or touched
+
+-DEBUGMODE=1 to run porgram in debug mode
+-DEBUGMODE=0 to run porgram wihtout debug mode
+
+-Make sure you have provided absolute path in java program in Property Class
+-Advisable to run server from home directory(For testing purpose it is fine if the program is not run from home directory)
+
+
+

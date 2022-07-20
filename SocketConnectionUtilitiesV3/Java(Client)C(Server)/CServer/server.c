@@ -15,7 +15,7 @@
 
 #include<signal.h>
 
-#define configFileLocation "/home/main/SocketConnectionUtilitiesV4/C(Client)C(Server)/Cserver/serverC.cfg"
+#define configFileLocation "/home/main/SocketConnectionUtilitiesV4/Java(Client)C(Server)/CServer/serverC.cfg"
 
 #define STRING_LENGTH 1024223
 

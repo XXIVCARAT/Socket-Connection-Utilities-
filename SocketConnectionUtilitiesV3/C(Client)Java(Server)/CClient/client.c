@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #define STRING_LENGTH 1024223
 #define SMALLER_STRING_LENGTH 1024
-#define configFileLocation "/home/main/SocketConnectionUtilitiesV4/C(Client)C(Server)/CClient/clientC.cfg"
+#define configFileLocation "/home/main/SocketConnectionUtilitiesV4/C(Client)Java(Server)/CClient/clientC.cfg"
 
 
 
